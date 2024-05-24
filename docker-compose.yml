@@ -13,7 +13,7 @@ services:
     ports:
       - '3308:3308'
     volumes:
-      - opsdatabase:/var/lib/mysql
+      - database:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 1s
@@ -80,7 +80,7 @@ services:
         condition: service_healthy
 
 volumes:
-  opsdatabase:
+  database:
 
 networks:
   api:
