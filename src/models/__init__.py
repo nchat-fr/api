@@ -5,6 +5,7 @@ from src.database import Base
 
 class Users(Base):
     __tablename__ = "users"
+    extend_existing = True
 
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String(255), unique=True, nullable=False)

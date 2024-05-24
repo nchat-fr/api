@@ -9,6 +9,7 @@ SQLALCHEMY_DATABASE_URL = f"mysql://root:root@database_test:3307/api"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, poolclass=StaticPool)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+print("test database")
 Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 

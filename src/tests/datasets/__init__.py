@@ -10,6 +10,7 @@ from src.utils.webtokens import hash_password
 
 class Dataset:
     def __init__(self):
+        print("new dataset")
         Base.metadata.drop_all(bind=engine)
         Base.metadata.create_all(bind=engine)
         self.session: Session = Session(bind=engine)
