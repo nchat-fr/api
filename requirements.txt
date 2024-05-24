@@ -1,0 +1,11 @@
+fastapi
+sqlalchemy
+uvicorn
+python-dotenv
+mysql
+pytest==7.1.2
+httpx
+pydantic
+passlib[bcrypt]
+python-jose[cryptography]
+python-socketio

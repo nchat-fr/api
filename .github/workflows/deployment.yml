@@ -1,0 +1,15 @@
+name: Deployment
+on: [workflow_dispatch]
+
+jobs:
+  deploy:
+    name: "Deploy"
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Stopping server
+        run: make down
+
+      - name: Running server
+        run: make up
