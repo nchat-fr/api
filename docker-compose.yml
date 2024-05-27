@@ -44,7 +44,7 @@ services:
     volumes:
       - './src/:/app/src'
     ports:
-      - '443:5000'
+      - '3000:5000'
     networks:
       - 'api'
     environment:

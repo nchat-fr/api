@@ -39,7 +39,17 @@ def login(body: LoginUserPayload, response: Response, db: Session = Depends(get_
     if not verify_password(body.password, user.password):
         raise exceptions.permissionDenied()
 
-    response.set_cookie(key="authenticator", value=create_access_token(user))
+    token = create_access_token(user)
+    response.set_cookie(
+        key="authenticator",
+        value=token,
+        max_age=3600,
+        secure=True,
+        httponly=True,
+        samesite="none",
+    )
+
+    return retrieve_access_token(token)
 
 
 @router.post("/register", status_code=201)
