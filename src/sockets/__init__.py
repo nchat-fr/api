@@ -13,13 +13,27 @@ sio_app = socketio.ASGIApp(
 clients = {}
 
 
-@sio_server.event
-async def connect(sid, environ, auth):
-    clients[sid] = auth
+def getUsernameForSid(sid: str):
+    for username, sids in clients.items():
+        if sid in sids:
+            return username
+    return None
+
+
+@sio_server.on("auth")
+async def client_auth(sid, identity):
+    if identity['username'] in clients:
+        clients[identity['username']].append(sid)
+    else:
+        clients[identity['username']] = [sid]
     await sio_server.emit('count', len(clients))
 
 
 @sio_server.event
 async def disconnect(sid):
-    del clients[sid]
+    username = getUsernameForSid(sid)
+    if username is not None:
+        clients[username].remove(sid)
+        if len(clients[username]) == 0:
+            del clients[username]
     await sio_server.emit('count', len(clients))
