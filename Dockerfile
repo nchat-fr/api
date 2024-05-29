@@ -3,6 +3,7 @@ FROM python:3.10-bullseye
 WORKDIR /app/
 ADD requirements.txt /app/
 ADD src/ /app/src/
+ADD storage/ /app/storage/
 
 RUN pip install -r requirements.txt
 

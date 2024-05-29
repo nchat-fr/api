@@ -15,4 +15,5 @@ app.add_middleware(
 )
 
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
-app.mount('/', app=sio_app)
+app.include_router(user_router, prefix="/users", tags=["User"])
+app.mount("/", app=sio_app)

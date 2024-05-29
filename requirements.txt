@@ -9,3 +9,5 @@ pydantic
 passlib[bcrypt]
 python-jose[cryptography]
 python-socketio
+pillow
+aiohttp

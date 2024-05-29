@@ -43,6 +43,7 @@ services:
       dockerfile: './Dockerfile'
     volumes:
       - './src/:/app/src'
+      - './storage/:/app/storage'
     ports:
       - '3000:5000'
     networks:
