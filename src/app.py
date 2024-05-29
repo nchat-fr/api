@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from src.sockets import sio_app
 from src.routes import *
 
 app = FastAPI()
@@ -13,3 +15,4 @@ app.add_middleware(
 )
 
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+app.mount('/', app=sio_app)
