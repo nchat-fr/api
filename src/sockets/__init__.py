@@ -25,6 +25,13 @@ async def client_auth(sid, identity):
     await sio_server.emit("count", len(clients))
 
 
+@sio_server.on("logout")
+async def client_logout(sid, identity):
+    if identity["username"] in clients:
+        del clients[identity["username"]]
+    await sio_server.emit("count", len(clients))
+
+
 @sio_server.event
 async def disconnect(sid):
     username = getUsernameForSid(sid)
