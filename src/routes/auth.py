@@ -43,7 +43,7 @@ def login(body: LoginUserPayload, response: Response, db: Session = Depends(get_
     response.set_cookie(
         key="authenticator",
         value=token,
-        max_age=3600,
+        max_age=24 * 3600,
         secure=True,
         httponly=True,
         samesite="none",
