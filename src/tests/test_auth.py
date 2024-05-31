@@ -61,7 +61,7 @@ def test_login(dataset):
 
 
 def test_logout(dataset):
-    url = "/auth"
+    url = "/auth/"
 
     # be sure to not be logged
     client.cookies = None
