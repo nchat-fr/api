@@ -44,9 +44,8 @@ def login(body: LoginUserPayload, response: Response, db: Session = Depends(get_
         key="authenticator",
         value=token,
         max_age=24 * 3600,
-        secure=True,
-        httponly=True,
-        samesite="none",
+        secure=False,
+        httponly=True
     )
 
     return retrieve_access_token(token)
