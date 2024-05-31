@@ -5,7 +5,7 @@ from sqlalchemy.pool import StaticPool
 from src.database import Base, get_db
 from src.app import app
 
-SQLALCHEMY_DATABASE_URL = f"mysql://root:root@database_test:3307/api"
+SQLALCHEMY_DATABASE_URL = f"mysql://root:root@database_test:3310/api"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, poolclass=StaticPool)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

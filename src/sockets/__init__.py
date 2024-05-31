@@ -2,7 +2,12 @@ import socketio
 import json
 
 sio_server = socketio.AsyncServer(
-    async_mode="asgi", cors_allowed_origins=["http://localhost", "http://194.164.48.49", "http://85.215.133.119"]
+    async_mode="asgi",
+    cors_allowed_origins=[
+        "http://localhost",
+        "http://194.164.48.49",
+        "http://85.215.133.119",
+    ],
 )
 
 sio_app = socketio.ASGIApp(socketio_server=sio_server, socketio_path="/ws/socket.io")
