@@ -1,3 +1,6 @@
+from fastapi import Depends
+from src.database import get_db
+
 import socketio
 import json
 
@@ -31,14 +34,14 @@ async def client_auth(sid, identity):
         clients[identity["username"]] = [sid]
 
     identities[sid] = identity
-    await sio_server.emit("count", len(clients))
+    await sio_server.emit("clients", clients)
 
 
 @sio_server.on("logout")
 async def client_logout(sid, identity):
     if identity["username"] in clients:
         del clients[identity["username"]]
-    await sio_server.emit("count", len(clients))
+    await sio_server.emit("clients", clients)
 
 
 @sio_server.on("message")
@@ -56,4 +59,4 @@ async def disconnect(sid):
         clients[username].remove(sid)
         if len(clients[username]) == 0:
             del clients[username]
-    await sio_server.emit("count", len(clients))
+    await sio_server.emit("clients", clients)
