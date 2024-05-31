@@ -52,14 +52,14 @@ async def message_received(sid, message):
     session: Session = Session(bind=engine)
 
     _message = models.Messages(
-        text=message.replace("\n", "<br />"),
+        text=message,
         user_id=identities[sid]["id"],
         room="/"
     )
 
     await sio_server.emit(
         "message",
-        {"identity": identities[sid], "message": message.replace("\n", "<br />")},
+        {"identity": identities[sid], "message": message},
     )
 
     session.add(_message)
