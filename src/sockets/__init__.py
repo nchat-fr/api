@@ -1,5 +1,8 @@
 from fastapi import Depends
-from src.database import get_db
+from sqlalchemy.orm import Session
+
+from src.database import engine
+import src.models as models
 
 import socketio
 import json
@@ -46,10 +49,21 @@ async def client_logout(sid, identity):
 
 @sio_server.on("message")
 async def message_received(sid, message):
+    session: Session = Session(bind=engine)
+
+    _message = models.Messages(
+        text=message.replace("\n", "<br />"),
+        user_id=identities[sid]["id"],
+        room="/"
+    )
+
     await sio_server.emit(
         "message",
         {"identity": identities[sid], "message": message.replace("\n", "<br />")},
     )
+
+    session.add(_message)
+    session.commit()
 
 
 @sio_server.event
